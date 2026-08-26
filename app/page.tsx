@@ -10,12 +10,12 @@ export default function Home() {
       <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px', marginBottom: '2.5rem' }}>
         Secure, highly-performant weather dashboard with a custom Comfort Index scoring algorithm.
       </p>
-      
+
       <div style={{ display: 'flex', gap: '1rem' }}>
         <a href="/api/auth/login?returnTo=/dashboard" style={{ padding: '0.75rem 1.5rem', backgroundColor: '#0070f3', color: '#fff', borderRadius: '8px', fontWeight: 600, fontSize: '1.125rem', boxShadow: '0 4px 14px 0 rgba(0,118,255,0.39)', transition: 'background-color 0.2s' }}>
           Login to Dashboard
         </a>
-        <a href="https://github.com/fidenz/weather-analytics" target="_blank" rel="noopener noreferrer" style={{ padding: '0.75rem 1.5rem', backgroundColor: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '8px', fontWeight: 600, fontSize: '1.125rem' }}>
+        <a href="https://github.com/Shalomhosheya/weather-analytics" target="_blank" rel="noopener noreferrer" style={{ padding: '0.75rem 1.5rem', backgroundColor: 'var(--card-bg)', color: 'var(--text-primary)', border: '1px solid var(--border-color)', borderRadius: '8px', fontWeight: 600, fontSize: '1.125rem' }}>
           View Source
         </a>
       </div>
