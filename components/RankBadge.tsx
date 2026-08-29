@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * This component adds a bit of flair! 
+ * We give out shiny medals to the top three most comfortable cities so they stand out from the crowd.
+ */
 interface RankBadgeProps {
   rank: number;
 }
@@ -19,7 +23,7 @@ export default function RankBadge({ rank }: RankBadgeProps) {
     color = '#1f2937';
   } else if (rank === 3) {
     badgeContent = '🥉 #3';
-    bg = 'linear-gradient(135deg, #fcd34d, #d97706)'; // Bronze-ish
+    bg = 'linear-gradient(135deg, #fcd34d, #d97706)';
     color = '#fff';
   }
 

@@ -1,3 +1,7 @@
+/**
+ * Hello! This module handles fetching the actual weather data from OpenWeatherMap.
+ * We'll use this to get all the data needed to calculate comfort scores for our favorite cities.
+ */
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
 export interface WeatherResponse {
@@ -27,7 +31,6 @@ export async function fetchWeatherById(cityId: number): Promise<WeatherResponse>
 
   const url = `${BASE_URL}?id=${cityId}&appid=${apiKey}&units=metric`;
 
-  // Using node-fetch / global fetch
   const res = await fetch(url, { next: { revalidate: 0 } });
 
   if (!res.ok) {

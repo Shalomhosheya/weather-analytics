@@ -4,6 +4,12 @@ import { extractCityCodes } from '@/lib/cities';
 import { fetchWeatherById } from '@/lib/weather';
 import { computeComfortIndex } from '@/lib/comfort-index';
 
+/**
+ * Welcome to the main Weather API route!
+ * This endpoint orchestrates the entire process: it checks our cache, fetches live data for our cities 
+ * if needed, computes how comfortable they are, and then ranks them from best to worst.
+ */
+
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -65,10 +71,8 @@ export async function GET() {
       };
     });
 
-  // Sort by Most Comfortable -> Least Comfortable
   processedCities.sort((a, b) => b.comfortScore - a.comfortScore);
 
-  // Assign rank
   const rankedCities = processedCities.map((city, index) => ({
     rank: index + 1,
     ...city,

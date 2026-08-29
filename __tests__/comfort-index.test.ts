@@ -7,6 +7,10 @@ import {
   computeComfortIndex
 } from '../lib/comfort-index';
 
+/**
+ * These are the tests that make sure our Comfort Index is calculating everything correctly.
+ * We want to be absolutely sure the math holds up so our users get the most accurate comfort ratings!
+ */
 describe('Comfort Index Algorithm', () => {
   test('tempScore should be 100 at ideal temperature (22°C)', () => {
     expect(tempScore(22)).toBe(100);
@@ -24,7 +28,7 @@ describe('Comfort Index Algorithm', () => {
   });
 
   test('windScore should be high for gentle breeze', () => {
-    expect(windScore(3)).toBe(88); // 100 - 3*4
+    expect(windScore(3)).toBe(88);
   });
 
   test('computeComfortIndex calculates composite score correctly', () => {
@@ -32,9 +36,9 @@ describe('Comfort Index Algorithm', () => {
       main: { temp: 22, humidity: 50, pressure: 1013 },
       wind: { speed: 2 },
       visibility: 10000,
+      clouds: { all: 30 },
     } as any;
     
-    // 0.35(100) + 0.25(100) + 0.20(92) + 0.10(100) + 0.10(100) = 35 + 25 + 18.4 + 10 + 10 = 98.4
-    expect(computeComfortIndex(mockData)).toBe(98.4);
+    expect(computeComfortIndex(mockData)).toBe(98.6);
   });
 });
