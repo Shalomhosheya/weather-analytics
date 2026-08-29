@@ -12,10 +12,11 @@ export interface WeatherResponse {
     temp_max: number;
     pressure: number;
     humidity: number;
+    clouds:{all:number}
   };
   visibility: number;
   wind: { speed: number; deg: number };
-  clouds: { all: number };
+
 }
 
 export async function fetchWeatherById(cityId: number): Promise<WeatherResponse> {
@@ -23,15 +24,15 @@ export async function fetchWeatherById(cityId: number): Promise<WeatherResponse>
   if (!apiKey) {
     throw new Error('OWM_API_KEY environment variable is missing.');
   }
-  
+
   const url = `${BASE_URL}?id=${cityId}&appid=${apiKey}&units=metric`;
-  
+
   // Using node-fetch / global fetch
   const res = await fetch(url, { next: { revalidate: 0 } });
-  
+
   if (!res.ok) {
     throw new Error(`OWM API error: ${res.status}`);
   }
-  
+
   return res.json();
 }

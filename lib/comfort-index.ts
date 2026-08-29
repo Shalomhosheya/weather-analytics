@@ -32,13 +32,22 @@ export function pressureScore(p: number): number {
   return Math.max(0, 100 - deviation * 1.5);
 }
 
+export function cloudinessScore(c: number):number{
+if(c >= 20 && c<=40) return 100;
+const dist = c<20?20-c :c-40;
+return Math.max(0,100-dist*1.5);
+}
+
+
+
 // Final weighted composite
 export function computeComfortIndex(data: WeatherResponse): number {
   const score =
-    0.35 * tempScore(data.main.temp) +
-    0.25 * humidityScore(data.main.humidity) +
-    0.20 * windScore(data.wind.speed) +
+    0.30 * tempScore(data.main.temp) +
+    0.22 * humidityScore(data.main.humidity) +
+    0.18 * windScore(data.wind.speed) +
     0.10 * visibilityScore(data.visibility) +
-    0.10 * pressureScore(data.main.pressure);
+    0.10 * pressureScore(data.main.pressure)+
+    0.10 * cloudinessScore(data.clouds.all);
   return Math.round(score * 10) / 10; // one decimal
 }

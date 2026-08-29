@@ -16,7 +16,7 @@ export interface CityResult {
   windSpeed: number;
   visibility: number;
   pressure: number;
-  clouds: number;
+  clouds:number;
   comfortScore: number;
 }
 
@@ -61,6 +61,10 @@ export default function CityCard({ city }: CityCardProps) {
         <div className={styles.detailItem}>
           <span>🌡️</span> {city.pressure} hPa
         </div>
+        <div className={styles.detailItem}>
+          <span>☁️</span> {city.clouds} Cloudiness
+        </div>
+
       </div>
 
       <div className={styles.comfortSection}>

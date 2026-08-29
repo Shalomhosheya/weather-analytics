@@ -62,5 +62,17 @@
   {
     "CityCode": 1102548,
     "CityName": "Colombo"
+  },
+  {
+    "CityCode": 1269843,
+    "CityName": "Hyderabad"
+  },
+  {
+    "CityCode": 1672551,
+    "CityName": "Taiwan"
+  },
+  {
+  "CityCode":1241964,
+  "CityName":"Kalutara"
   }
 ]

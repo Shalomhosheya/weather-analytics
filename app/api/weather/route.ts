@@ -19,16 +19,16 @@ export async function GET() {
 
   const cities = extractCityCodes();
   const rawCacheStatuses: any[] = [];
-  
+
   const weatherPromises = cities.map(async (city) => {
     const rawKey = KEYS.rawWeather(city.CityCode);
     const cachedRaw = cache.get<any>(rawKey);
-    
+
     if (cachedRaw) {
       rawCacheStatuses.push({ cityId: city.CityCode, status: 'HIT', ttlRemaining: cache.getTtl(rawKey) });
       return { city, weatherData: cachedRaw };
     }
-    
+
     try {
       const data = await fetchWeatherById(city.CityCode);
       cache.set(rawKey, data);
@@ -41,13 +41,13 @@ export async function GET() {
   });
 
   const results = await Promise.allSettled(weatherPromises);
-  
+
   const processedCities = results
     .filter((res) => res.status === 'fulfilled' && res.value.weatherData)
     .map((res: any) => {
       const { city, weatherData } = res.value;
       const score = computeComfortIndex(weatherData);
-      
+
       return {
         cityId: city.CityCode,
         cityName: city.CityName,
@@ -60,14 +60,14 @@ export async function GET() {
         windSpeed: weatherData.wind.speed,
         visibility: weatherData.visibility,
         pressure: weatherData.main.pressure,
-        clouds: weatherData.clouds.all,
         comfortScore: score,
+        clouds: weatherData.clouds.all,
       };
     });
 
   // Sort by Most Comfortable -> Least Comfortable
   processedCities.sort((a, b) => b.comfortScore - a.comfortScore);
-  
+
   // Assign rank
   const rankedCities = processedCities.map((city, index) => ({
     rank: index + 1,
